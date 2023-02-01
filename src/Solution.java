@@ -2,14 +2,33 @@ import java.util.ArrayList;
 
 public class Solution {
 
-    String solution(String s) {
+    static String solution(String s) {
         String pass = "aba";
         isPalindrome(pass);
         System.out.println(generatePrefixes(s));
-        boolean contin = true;
+        System.out.println(decideWhichOne(generatePrefixes(s)));
         String stringGiven = s;
+        //String result = decideWhichOne(generatePrefixes(stringGiven));
+        //System.out.println(result);
+        boolean contin = true;
+
+        for (int i = 0; i < 10000; i++){
+            String result = decideWhichOne(generatePrefixes(stringGiven));
+            if(result.equals("")) {
+                System.out.println("Fizz");
+                System.out.println(stringGiven);
+                return stringGiven;
+            }
+            else {
+                System.out.println("Buzz");
+                System.out.println(stringGiven);
+                stringGiven = stringGiven.replaceFirst(result, "");
+            }
+        }
+
         do {
             String result = decideWhichOne(generatePrefixes(stringGiven));
+            System.out.println("Blah");
             if(result.equals("")) {
                 contin = false;
                 return stringGiven;
@@ -17,13 +36,12 @@ public class Solution {
             else {
                 stringGiven.replaceFirst(result, "");
             }
-
         }
-        while (contin);
-        return "";
+        while (!contin);
+        return stringGiven;
     }
 
-    String decideWhichOne(ArrayList<String> ls){
+    static String decideWhichOne(ArrayList<String> ls){
         String longest = "";
         for (int i = 0; i < ls.size(); i++){
             if(isPalindrome(ls.get(i)) && ls.get(i).length() > 1){
@@ -35,7 +53,7 @@ public class Solution {
         return longest;
     }
 
-    ArrayList<String> generatePrefixes(String str) {
+    static ArrayList<String> generatePrefixes(String str) {
         String stringu = "";
         ArrayList<String> list = new ArrayList<>();
         for (int i = 0; i < str.length(); i++){
@@ -45,7 +63,7 @@ public class Solution {
         return list;
     }
 
-    public boolean isPalindrome(String str) {
+    public static boolean isPalindrome(String str) {
         String stringu = "";
         for (int i = str.length() - 1; i >= 0; i--) {
             stringu = stringu + str.charAt(i);
