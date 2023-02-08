@@ -34,10 +34,10 @@ public class Solution {
                 return stringGiven;
             }
             else {
-                stringGiven.replaceFirst(result, "");
+                stringGiven = stringGiven.replaceFirst(result, "");
             }
         }
-        while (!contin);
+        while (contin);
         return stringGiven;
     }
 
